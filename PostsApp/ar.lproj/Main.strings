@@ -37,3 +37,9 @@
 
 /* Class = "UITextField"; placeholder = "Code"; ObjectID = "lJN-He-vKp"; */
 "lJN-He-vKp.placeholder" = "الرمز";
+
+/* Class = "UISegmentedControl"; TZR-T7-CZn.segmentTitles[0] = "Offline Mode"; ObjectID = "TZR-T7-CZn"; */
+"TZR-T7-CZn.segmentTitles[0]" = "غير متصل";
+
+/* Class = "UISegmentedControl"; TZR-T7-CZn.segmentTitles[1] = "Online Mode"; ObjectID = "TZR-T7-CZn"; */
+"TZR-T7-CZn.segmentTitles[1]" = "متصل بالانترنت";
