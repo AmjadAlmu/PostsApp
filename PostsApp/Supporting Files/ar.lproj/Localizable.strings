@@ -1,0 +1,36 @@
+/* 
+  Localizable.strings
+  PostsApp
+
+  Created by Amjad Almuwallad on 29/06/2020.
+  Copyright © 2020 Amjad Almuwallad. All rights reserved.
+*/
+
+//MARK: - General label
+"alert_ok" = "حسنا";
+"alert_cancel" = "إلغاء";
+"progressHUD.waitLabel" = "يرجى الانتظار";
+"Post_TitleNotAvailable" = "العنوان غير متاح";
+"Details_DetailsNotAvailable" = "التفاصيل غير متاحة";
+
+//MARK: - LoginViewController
+"LoginViewController.UnableToRegister" = "غير قادر على التسجيل";
+
+//MARK: - VerificationViewController
+"VerificationViewController.UnableToVerify" = "غير قادر على التحقق من الرمز";
+
+//MARK: - PostsViewController
+"PostsViewController.UnableToload" = "غير قادر على تحميل المشاركات";
+"PostsViewController.DeletePost" = "هل أنت متأكد من حذف هذه المشاركة؟";
+"PostsViewController.DeletePostSuccess" = "تم حذف المشاركة بنجاح";
+"PostsViewController.DeletePostUnSuccess" = "لم يتم حذف المشاركة بنجاح";
+"PostsViewController.AddPostSuccess" = "تم اضافة المشاركة بنجاح";
+"PostsViewController.AddPostUnSuccess" = "لم يتم إضافة المشاركة بنجاح";
+
+//MARK: - PostDetailsViewController
+"PostDetailsViewController.UpdateAlert" = "تم تحديث المشاركة بنجاح";
+"PostDetailsViewController.UpdateButton" = "تحديث";
+"PostDetailsViewController.UpdateAlertFill" = "لم يتم تحديث المشاركة";
+
+//MARK: - AddPostPopUpController
+"AddPostPopUpController.sendPostAlert" = "يجب إدخال العنوان والتفاصيل قبل المتابعة";

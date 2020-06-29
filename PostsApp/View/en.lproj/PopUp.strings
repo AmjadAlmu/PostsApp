@@ -1,0 +1,12 @@
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "DWT-Ti-Zar"; */
+"DWT-Ti-Zar.normalTitle" = "إرسال";
+
+/* Class = "UILabel"; text = "Add New Post"; ObjectID = "Ee6-td-N05"; */
+"Ee6-td-N05.text" = "إضافة مشاركة جديدة";
+
+/* Class = "UITextField"; placeholder = "Title"; ObjectID = "b44-99-1Mx"; */
+"b44-99-1Mx.placeholder" = "العنوان";
+
+/* Class = "UILabel"; text = "Tell us more details about the post"; ObjectID = "pqk-yc-uAD"; */
+"pqk-yc-uAD.text" = "اضف تفاصيل اضافية عن مشاركتك";

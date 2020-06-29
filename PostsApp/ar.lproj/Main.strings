@@ -1,0 +1,39 @@
+
+/* Class = "UINavigationItem"; title = "Post Details"; ObjectID = "7rf-WU-xFt"; */
+"7rf-WU-xFt.title" = "تفاصل المشاركة";
+
+/* Class = "UILabel"; text = "Please enter the verification number"; ObjectID = "9Tk-vY-WjB"; */
+"9Tk-vY-WjB.text" = "يرجى إدخال رقم التحقق";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "GTE-BG-qN5"; */
+"GTE-BG-qN5.text" = "Label";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "K00-hY-5IX"; */
+"K00-hY-5IX.title" = " ";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "OIz-0n-wx5"; */
+"OIz-0n-wx5.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Login"; ObjectID = "UgN-UJ-KaE"; */
+"UgN-UJ-KaE.normalTitle" = "تسجيل الدخول";
+
+/* Class = "UINavigationItem"; title = "Posts"; ObjectID = "WcM-lt-4sI"; */
+"WcM-lt-4sI.title" = "المشاركات";
+
+/* Class = "UIButton"; normalTitle = "Skip"; ObjectID = "YvA-sa-tfP"; */
+"YvA-sa-tfP.normalTitle" = "تخطي";
+
+/* Class = "UITextField"; placeholder = "Phone number"; ObjectID = "apo-lI-6fb"; */
+"apo-lI-6fb.placeholder" = "رقم الجوال";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "beP-cc-odl"; */
+"beP-cc-odl.text" = "Label";
+
+/* Class = "UILabel"; text = "Welcome Back"; ObjectID = "cNU-sd-ydc"; */
+"cNU-sd-ydc.text" = "مرحبا بعودتك";
+
+/* Class = "UIButton"; normalTitle = "Verify"; ObjectID = "k97-1A-vst"; */
+"k97-1A-vst.normalTitle" = "تأكيد";
+
+/* Class = "UITextField"; placeholder = "Code"; ObjectID = "lJN-He-vKp"; */
+"lJN-He-vKp.placeholder" = "الرمز";
