@@ -13,6 +13,7 @@ import MBProgressHUD
 class PostsViewController: UIViewController {
 
     @IBOutlet weak var postsTableView: UITableView!
+    @IBOutlet weak var segmentedControlOutlet: UISegmentedControl!
     
     var posts = [Post]()
     
@@ -28,6 +29,7 @@ class PostsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         postsTableView.register(UINib(nibName: "LodingTableViewCell", bundle: nil), forCellReuseIdentifier: "LoadingCell")
+        segmentedControlOutlet.addTarget(self, action: #selector(segmentedChanged), for: .valueChanged)
         shoudShowLoadingCell = true
         postsTableView.tableFooterView = UIView()
         loadPosts()
@@ -69,6 +71,23 @@ class PostsViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    @objc func segmentedChanged(sender:UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            isOfflineMode = true
+            refreshData()
+        } else {
+            isOfflineMode = false
+            refreshData()
+        }
+    }
+    
+    func refreshData() {
+        currentPage = 0
+        posts.removeAll()
+        loadPosts()
+        postsTableView.reloadData()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -194,10 +213,13 @@ extension PostsViewController: UITableViewDelegate, UITableViewDataSource {
 
 
 extension PostsViewController: AddPostPopUpControllerDelegate {
-    func addnewPost(with post: Post) {
+    func addnewPost(with post: PostObject) {
         if isOfflineMode {
-            post.id = Int32.random(in: 1..<10000)
-            posts.append(post)
+            let newPost = Post(context: context)
+            newPost.id = Int32.random(in: 1..<10000)
+            newPost.title = post.title
+            newPost.details = post.details
+            posts.append(newPost)
             savePostsToCoreData()
         } else {
             let progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
@@ -219,6 +241,6 @@ extension PostsViewController: AddPostPopUpControllerDelegate {
 
 extension PostsViewController: PostDetailsViewControllerDelegate {
     func refreshTable() {
-        loadPosts()
+        refreshData()
     }
 }

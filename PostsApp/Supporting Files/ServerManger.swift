@@ -118,7 +118,7 @@ class ServerManger {
         }
     }
     
-    func addPost(with post: Post, completionHandler: @escaping ( ResponseCode?)  -> ()) {
+    func addPost(with post: PostObject, completionHandler: @escaping ( ResponseCode?)  -> ()) {
         var url = Configuration.SERVER_URL
         url.append(Configuration.POSTS_ENDPOINT)
         
@@ -166,13 +166,13 @@ class ServerManger {
         }
     }
     
-    func updatePost(with post: Post, completionHandler: @escaping ( ResponseCode?)  -> ()) {
+    func updatePost(with post: PostObject, completionHandler: @escaping ( ResponseCode?)  -> ()) {
         var url = Configuration.SERVER_URL
         url.append(Configuration.POSTS_ENDPOINT)
         url.append("/\(Int(post.id))")
         
         let parameters: Parameters = [
-            "id": Int(post.id),
+            "id": post.id!,
             "title": post.title!,
             "Details": post.details!
         ]

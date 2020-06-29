@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 protocol AddPostPopUpControllerDelegate {
-    func addnewPost(with post: Post)
+    func addnewPost(with post: PostObject)
 }
 
 class AddPostPopUpController: UIViewController {
@@ -21,7 +21,6 @@ class AddPostPopUpController: UIViewController {
     
     var delegate: AddPostPopUpControllerDelegate?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var isToUpdatePost = false
     var postIdToUpdate: Int32!
     
     override func viewDidLoad() {
@@ -52,13 +51,13 @@ class AddPostPopUpController: UIViewController {
     //MARK: - Actions
     
     @IBAction func sendPostAction(_ sender: UIButton) {
-        let newPost = Post(context: context)
+        var newPost = PostObject()
         guard let title = titleTextField.text, let details = detailsTextView.text else {
             Configuration.displayAlert(self, title: nil, message: NSLocalizedString("AddPostPopUpController.sendPostAlert", comment: ""))
             return
         }
-        if isToUpdatePost {
-            newPost.id = postIdToUpdate
+        if let _ = postIdToUpdate {
+            newPost.id = Int(postIdToUpdate!)
         }
         newPost.title = title
         newPost.details = details

@@ -177,7 +177,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="b1s-HK-SD3">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="159" width="414" height="703"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="80" id="Vgw-zL-voW" customClass="PostTableViewCell" customModule="PostsApp" customModuleProvider="target">
@@ -218,13 +218,23 @@
                                     <outlet property="delegate" destination="U7a-h9-Plc" id="On4-37-QbG"/>
                                 </connections>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="TZR-T7-CZn">
+                                <rect key="frame" x="30" y="108" width="354" height="32"/>
+                                <segments>
+                                    <segment title="Offline Mode"/>
+                                    <segment title="Online Mode"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="b1s-HK-SD3" firstAttribute="leading" secondItem="vve-Nf-cqb" secondAttribute="leading" id="80e-PP-zdN"/>
+                            <constraint firstItem="TZR-T7-CZn" firstAttribute="top" secondItem="vve-Nf-cqb" secondAttribute="top" constant="20" id="BMT-Kd-b9G"/>
                             <constraint firstItem="vve-Nf-cqb" firstAttribute="bottom" secondItem="b1s-HK-SD3" secondAttribute="bottom" id="Fs8-oY-Egp"/>
                             <constraint firstItem="vve-Nf-cqb" firstAttribute="trailing" secondItem="b1s-HK-SD3" secondAttribute="trailing" id="MVp-JR-IvO"/>
-                            <constraint firstItem="b1s-HK-SD3" firstAttribute="top" secondItem="vve-Nf-cqb" secondAttribute="top" id="ZAT-sF-T5d"/>
+                            <constraint firstItem="b1s-HK-SD3" firstAttribute="top" secondItem="TZR-T7-CZn" secondAttribute="bottom" constant="20" id="Ost-ii-08R"/>
+                            <constraint firstItem="TZR-T7-CZn" firstAttribute="leading" secondItem="vve-Nf-cqb" secondAttribute="leading" constant="30" id="bty-3L-DQy"/>
+                            <constraint firstItem="vve-Nf-cqb" firstAttribute="trailing" secondItem="TZR-T7-CZn" secondAttribute="trailing" constant="30" id="mXC-eD-2N4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vve-Nf-cqb"/>
                     </view>
@@ -241,6 +251,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="postsTableView" destination="b1s-HK-SD3" id="TjM-zo-Oo8"/>
+                        <outlet property="segmentedControlOutlet" destination="TZR-T7-CZn" id="3PC-6m-FcV"/>
                         <segue destination="Gtz-OL-eoq" kind="show" identifier="ShowDetailsViewController" id="HR4-xU-Ba9"/>
                     </connections>
                 </viewController>

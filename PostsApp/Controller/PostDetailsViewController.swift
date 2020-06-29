@@ -43,6 +43,12 @@ class PostDetailsViewController: UIViewController {
         detailsTableView.reloadData()
     }
     
+    func setUpdatedPostData(post: PostObject) {
+        selectedPost.id = Int32(post.id)
+        selectedPost.title = post.title
+        selectedPost.details = post.details
+    }
+    
     
     @IBAction func editPost(_ sender: Any) {
         popupView = PopupController
@@ -64,8 +70,7 @@ class PostDetailsViewController: UIViewController {
         popupView = popupView?.show(addPostPopup)
         addPostPopup.titleTextField.text = selectedPost.title ?? NSLocalizedString("Post_TitleNotAvailable", comment: "")
         addPostPopup.detailsTextView.text = selectedPost.details ?? NSLocalizedString("Details_DetailsNotAvailable", comment: "")
-        addPostPopup.postIdToUpdate = selectedPost.id
-        addPostPopup.isToUpdatePost = true
+        addPostPopup.postIdToUpdate = Int32(selectedPost.id)
         addPostPopup.sendButtonOutlet.setTitle(NSLocalizedString("PostDetailsViewController.UpdateButton", comment: ""), for: .normal)
     }
     
@@ -95,28 +100,22 @@ extension PostDetailsViewController: UITableViewDelegate, UITableViewDataSource 
 
 
 extension PostDetailsViewController: AddPostPopUpControllerDelegate {
-    func addnewPost(with post: Post) {
+    func addnewPost(with post: PostObject) {
         if isOfflineMode {
-            let fetchRequest =
-                    NSFetchRequest<NSManagedObject>(entityName: "Post")
-            fetchRequest.predicate = NSPredicate(format:"id == %d", post.id)
-            let result = try? context.fetch(fetchRequest)
-            if let updatedPost = result?.first {
-                updatedPost.setValue(post.details, forKey: "details")
-                updatedPost.setValue(post.title, forKey: "title")
-                popupView?.dismiss()
-                savePostsToCoreData()
-            }
+            selectedPost.setValue(post.details, forKey: "details")
+            selectedPost.setValue(post.title, forKey: "title")
+            popupView?.dismiss()
+            savePostsToCoreData()
         } else {
             let progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
-            progressHUD.label.text = "Please wait"
+            progressHUD.label.text = NSLocalizedString("progressHUD.waitLabel", comment: "")
             ServerManger.sharedInstance.updatePost(with: post) { [weak self] (statusCode) in
                 progressHUD.hide(animated: true)
                 if let _ = statusCode {
                     self?.delegate?.refreshTable()
                     self?.popupView?.dismiss()
                     Configuration.displayAlert(self, title: nil, message: NSLocalizedString("PostDetailsViewController.UpdateAlert", comment: ""))
-                    self?.selectedPost = post
+                    self?.setUpdatedPostData(post: post)
                     self?.detailsTableView.reloadData()
                 } else {
                     Configuration.displayAlert(self, title: nil, message: NSLocalizedString("PostDetailsViewController.UpdateAlertFill", comment: ""))
