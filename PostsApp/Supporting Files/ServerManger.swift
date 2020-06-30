@@ -83,7 +83,7 @@ class ServerManger {
         }
     }
     
-    func getPost (completionHandler: @escaping ( [Post]?)  -> ()) {
+    func getPost (completionHandler: @escaping ( [PostObject]?)  -> ()) {
         var url = Configuration.SERVER_URL
         url.append(Configuration.POSTS_ENDPOINT)
         
@@ -94,10 +94,10 @@ class ServerManger {
                     case .success(let json):
                         if statusCode == ResponseCode.get_success.code {
                             if let jsonObject = json as? [[String: Any]] {
-                                var posts:[Post] = []
+                                var posts:[PostObject] = []
                                 for postObject in jsonObject {
-                                    let post = Post(context: self.context)
-                                    guard let postId = postObject["id"] as? Int32 else {
+                                    var post = PostObject()
+                                    guard let postId = postObject["id"] as? Int else {
                                         completionHandler(nil)
                                         return
                                     }

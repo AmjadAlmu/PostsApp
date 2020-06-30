@@ -16,6 +16,7 @@ class PostsViewController: UIViewController {
     @IBOutlet weak var segmentedControlOutlet: UISegmentedControl!
     
     var posts = [Post]()
+    var onlinePosts = [PostObject]()
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var popupView: PopupController?
@@ -64,7 +65,7 @@ class PostsViewController: UIViewController {
             ServerManger.sharedInstance.getPost { [weak self] (posts) in
                 progressHUD.hide(animated: true)
                 if let _ = posts {
-                    self?.posts = posts!
+                    self?.onlinePosts = posts!
                     self?.postsTableView.reloadData()
                 } else {
                     Configuration.displayAlert(self, title: "", message: NSLocalizedString("PostsViewController.UnableToload", comment: ""))
@@ -74,13 +75,8 @@ class PostsViewController: UIViewController {
     }
     
     @objc func segmentedChanged(sender:UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
-            isOfflineMode = true
-            refreshData()
-        } else {
-            isOfflineMode = false
-            refreshData()
-        }
+        isOfflineMode = sender.selectedSegmentIndex == 0 ? true : false
+        refreshData()
     }
     
     func refreshData() {
@@ -127,7 +123,12 @@ class PostsViewController: UIViewController {
     
     private func isLoadingIndexPath(_ indexPath:IndexPath)-> Bool {
         guard shoudShowLoadingCell else { return false }
-        return indexPath.row == self.posts.count
+        if isOfflineMode {
+            return indexPath.row == self.posts.count
+        } else {
+            return indexPath.row == self.onlinePosts.count
+        }
+        
     }
     
     private func fetchData() {
@@ -159,7 +160,7 @@ class PostsViewController: UIViewController {
 
 extension PostsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        return isOfflineMode ? posts.count : onlinePosts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -167,8 +168,13 @@ extension PostsViewController: UITableViewDelegate, UITableViewDataSource {
             return tableView.dequeueReusableCell(withIdentifier: "LoadingCell", for: indexPath)
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
-        let cureentPost = posts[indexPath.row]
-        cell.postTitleLabel.text = cureentPost.title ?? NSLocalizedString("Post_TitleNotAvailable", comment: "")
+        if isOfflineMode {
+            let cureentPost = posts[indexPath.row]
+            cell.postTitleLabel.text = cureentPost.title ?? NSLocalizedString("Post_TitleNotAvailable", comment: "")
+        } else {
+            let cureentPost = onlinePosts[indexPath.row]
+            cell.postTitleLabel.text = cureentPost.title ?? NSLocalizedString("Post_TitleNotAvailable", comment: "")
+        }
         return cell
     }
     
